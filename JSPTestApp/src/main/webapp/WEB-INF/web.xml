@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>UploadServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AjaxProcessingServlet</servlet-name>
+  	<display-name>AjaxProcessingServlet</display-name>
+  	<description></description>
+  	<servlet-class>AjaxProcessingServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>UploadServlet</servlet-name>
   	<url-pattern>/UploadServlet</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>Upload</servlet-name>
   	<url-pattern>/Upload</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AjaxProcessingServlet</servlet-name>
+  	<url-pattern>/AjaxProcessingServlet</url-pattern>
   </servlet-mapping>
 </web-app>

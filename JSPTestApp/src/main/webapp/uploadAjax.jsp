@@ -10,21 +10,21 @@
   <p>
     Page for upload file via AJAX
   </p>
-  <form id="form" action="" enctype="multipart/form-data">
+  <form id="form" action="" enctype="multipart/form-data" method="post">
     <input type="file" name="file" required="required">
     <br><br>
     <button onclick="doAjax()">Send file</button>
   </form>
+  <script>
+    function doAjax() {
+	  alert("doAjax function invoked");
+	  var xhr = new XMLHttpRequest();
+	  var fileForm = document.getElementById("form");
+	  var formData = new FormData(fileForm);
+	  xhr.open("post","UploadServlet",true);
+	  xhr.send(formData);
+	  alert("image was sent");
+    }
+  </script>
 </body>
-<script>
-  function doAjax() {
-	alert("doAjax function invoked");
-	var xhr = new XMLHttpRequest();
-	var fileForm = document.getElementById("form");
-	var formData = new FormData(fileForm);
-	xhr.open("post","UploadServlet",true);
-	xhr.send(formData);
-	alert("image was sent");
-}
-</script>
 </html>
