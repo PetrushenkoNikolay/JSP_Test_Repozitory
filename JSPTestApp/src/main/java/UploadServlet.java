@@ -32,6 +32,8 @@ public class UploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String descr = request.getParameter("description");
+		System.out.println(descr);
 		String appPath = request.getServletContext().getRealPath("");
 		String savePath = appPath+File.separator+SAVE_DIR;
 		File saveDir = new File(savePath);
@@ -40,17 +42,17 @@ public class UploadServlet extends HttpServlet {
 		}
 		for (Part part : request.getParts()) {
 			String fileName = extractFileName(part);
-			System.out.println(fileName);
 			//fileName = new File(fileName).getName();
-			System.out.println(fileName);
 			if(fileName!=null&&!fileName.equals(""))
 			part.write(savePath+File.separator+fileName);
 		}
 	}
 	private String extractFileName (Part part) {
 		String contentDisp = part.getHeader("content-disposition");
+		System.out.println(contentDisp);
 		String[] items = contentDisp.split(";");
 		for (String s : items) {
+			//System.out.println(s);
 			if (s.trim().startsWith("filename")) {
 				return s.substring(s.indexOf("=")+2, s.length()-1);
 			}

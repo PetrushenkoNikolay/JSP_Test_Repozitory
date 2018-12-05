@@ -36,10 +36,10 @@
     	    alert('Error encountered');
     	  }
     	  var dispDiv = document.getElementById("dispDiv1");
-    	  dispDiv.innerHTML = "<iframe src= \""+xhr.responseText+"\" width ='320px' height='320px' frameborder='0\''/>";
+    	  dispDiv.innerHTML = xhr.responseText;
     	}
       } else {
-    	  var dispDiv = document.getElementById("displayDiv");
+    	  var dispDiv = document.getElementById("dispDiv1");
     	  dispDiv.innerHTML = '';
       }
       

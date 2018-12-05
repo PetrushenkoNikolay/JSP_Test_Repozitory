@@ -11,20 +11,30 @@
     Page for upload file via AJAX
   </p>
   <form id="form" action="" enctype="multipart/form-data" method="post">
-    <input type="file" name="file" required="required">
+    Загрузка изображения <input type="file" name="file" required="required">
     <br><br>
-    <button onclick="doAjax()">Send file</button>
+    <textarea id="txtarea" rows="5" cols="50" placeholder="Введите описание товара" required="required"></textarea>
+    <br><br>
+    Выберите цвет <select id="selectForm">
+      <option>белый</option>
+      <option>черный</option>
+      <option>красный</option>
+    </select>
+    <br><br>
+    <button onclick="doAjax()">Send file on the server</button>
   </form>
   <script>
     function doAjax() {
-	  alert("doAjax function invoked");
 	  var xhr = new XMLHttpRequest();
 	  var fileForm = document.getElementById("form");
 	  var formData = new FormData(fileForm);
+	  var prodDescr = document.getElementById("txtarea").value;
+	  var color = document.getElementById("selectForm").value;
+	  formData.append("description",prodDescr);
+	  formData.append("color",color);
 	  xhr.open("post","UploadServlet",true);
 	  xhr.send(formData);
-	  alert("image was sent");
-    }
+	  }
   </script>
 </body>
 </html>
