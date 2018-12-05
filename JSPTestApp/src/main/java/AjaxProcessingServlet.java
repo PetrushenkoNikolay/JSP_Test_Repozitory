@@ -25,7 +25,7 @@ public class AjaxProcessingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String boxName = request.getParameter("box");
-		if (boxName.equals("1")) response.getWriter().println("You checked first checkbox");
+		if (boxName.equals("1")) response.getWriter().println("image.jsp");
 		
 	}
 

@@ -17,7 +17,8 @@
   <p>
     <label>Check box 2<input type="checkbox" name="checkbox2"></label>
   </p>
-  <div id="displayDiv"></div>
+  <div id="dispDiv1"></div>
+  <div id="dispDiv2"></div>
   <script>
     function doCheckboxFunc1() {
       var chbox1 = document.getElementsByName("checkbox1")[0];
@@ -34,8 +35,8 @@
     	  if (this.status!=200) {
     	    alert('Error encountered');
     	  }
-    	  var dispDiv = document.getElementById("displayDiv");
-    	  dispDiv.innerHTML = xhr.responseText;
+    	  var dispDiv = document.getElementById("dispDiv1");
+    	  dispDiv.innerHTML = "<iframe src= \""+xhr.responseText+"\" width ='320px' height='320px' frameborder='0\''/>";
     	}
       } else {
     	  var dispDiv = document.getElementById("displayDiv");
