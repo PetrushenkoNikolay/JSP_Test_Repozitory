@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DB_Manager {
 	private final String user = "root";
@@ -11,6 +12,7 @@ public class DB_Manager {
 	private final String driver = "com.mysql.jdbc.Driver";
 	private final String url = "jdbc:mysql://localhost:3306/";
 	private final String dbName = "my_db";
+	ArrayList<Product> list;
 	
 	//Method for upload product data in DB
 	public int insertProduct (Product prod) throws Exception {
@@ -43,5 +45,10 @@ public class DB_Manager {
 			e.printStackTrace();
 		}
 		return id;
+	}
+	
+	public ArrayList<Product> getProducts () {
+		//
+		return list;
 	}
 }
