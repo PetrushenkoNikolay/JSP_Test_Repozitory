@@ -32,8 +32,29 @@ public class UploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//variable, that means last inserted ID in DB, used in saving image name
+		int ind;
+		
+		//fetch product properties from request
 		String descr = request.getParameter("description");
-		System.out.println(descr);
+		String col = request.getParameter("color");
+		String name = request.getParameter("name");
+		String brand = request.getParameter("brand");
+		double price = Double.parseDouble(request.getParameter("price"));
+		
+		//create product object for dispatching in DBManager
+		Product product = new Product(descr, col, brand, name, price);
+		
+		//create dbmanager and forward product object in for insertion in DB
+		try {
+			DB_Manager manager = new DB_Manager();
+			ind = manager.insertProduct(product);//insert prod and get last index of entry
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//retriev image from request and save it
 		String appPath = request.getServletContext().getRealPath("");
 		String savePath = appPath+File.separator+SAVE_DIR;
 		File saveDir = new File(savePath);
@@ -44,12 +65,13 @@ public class UploadServlet extends HttpServlet {
 			String fileName = extractFileName(part);
 			//fileName = new File(fileName).getName();
 			if(fileName!=null&&!fileName.equals(""))
-			part.write(savePath+File.separator+fileName);
+			part.write(savePath+File.separator+ind+fileName);
 		}
 	}
+	
 	private String extractFileName (Part part) {
 		String contentDisp = part.getHeader("content-disposition");
-		System.out.println(contentDisp);
+		//System.out.println(contentDisp);
 		String[] items = contentDisp.split(";");
 		for (String s : items) {
 			//System.out.println(s);

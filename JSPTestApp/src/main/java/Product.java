@@ -1,16 +1,19 @@
 
 public class Product {
-	private String category;
 	private int id;
 	private String description;
 	private String color;
 	private String brand;
+	private String name;
 	private double price;
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
+	
+	public Product(String description, String color, String brand, String name, double price) {
+		super();
+		this.description = description;
+		this.color = color;
+		this.brand = brand;
+		this.name = name;
+		this.price = price;
 	}
 	public int getId() {
 		return id;
@@ -41,6 +44,12 @@ public class Product {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
