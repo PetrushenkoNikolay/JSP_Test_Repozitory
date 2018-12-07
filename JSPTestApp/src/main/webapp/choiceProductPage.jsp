@@ -7,7 +7,7 @@
 <title>Choice of products</title>
 </head>
 <body>
-    <form id="form" action="" method="get">
+    <form id="form" action="" method="get" onsubmit="return false;">
     Выберите тип товара <select id="selectTypeForm">
       <option>bysicle</option>
       <option>motosycle</option>
@@ -31,32 +31,31 @@
       <option>green</option>
     </select>
     <br><br>
-    Введите цену  от<input id="minPrice" type="text" placeholder="0.00 руб" required="required">
-    до<input id="maxPrice" type="text" placeholder="0.00 руб" required="required"> 
+    Введите цену  от<input id="minPrice" type="text" placeholder="0.00 руб" required="required" autocomplete="off">
+    до<input id="maxPrice" type="text" placeholder="0.00 руб" required="required" autocomplete="off"> 
     <br><br>
-    <button id="submit" onclick="doRequest()">Показать</button>
+    <button onclick="doRequest()">Показать</button>
     </form>
+    <div id="iframeDive"></div>
     <script>
         function doRequest() {
-			var name = document.getElementById("selectTypeForm").value;
+        	var name = document.getElementById("selectTypeForm").value;
 			var brand = document.getElementById("selectBrandForm").value;
 			var color = document.getElementById("selectColorForm").value;
 			var minPrice = document.getElementById("minPrice").value;
 			var maxPrice = document.getElementById("maxPrice").value;
-			alert('');
-			var params = 'name='+encodeURIComponent(name)+'&brand='+encodeURIComponent(brand)+'&color='+encodeURIComponent(color)+'&minPrice'+encodeURIComponent(minPrice)+'&maxPrice'+encodeURIComponent(maxPrice);
-			alert(params);
+			var params = 'name='+encodeURIComponent(name)+'&brand='+encodeURIComponent(brand)+'&color='+encodeURIComponent(color)+'&minPrice='+encodeURIComponent(minPrice)+'&maxPrice='+encodeURIComponent(maxPrice);
 			var xhr = new XMLHttpRequest();
-			alert('xhr created');
-			xhr.open("get",'ChoiceProductServlet?'+params);
-			alert('xhr opened');
+			xhr.open("get",'ChoiceProductServlet?'+params,true);
 			xhr.send();
-			alert('xhr sent');
 			xhr.onreadystatechange = function() {
-				if (readyState!=4) return;
-				if (status=200) alert("ok!");
+				if (xhr.readyState!=4) return;
+				if (xhr.status==200) {
+					var ifr = document.getElementById("iframeDive");
+		        	ifr.innerHTML = "<iframe src='"+xhr.responseText+"' frameborder='no'/ style='height:400px'>";
+				}
 			}
 		}
-    </script>
+     </script>
 </body>
 </html>

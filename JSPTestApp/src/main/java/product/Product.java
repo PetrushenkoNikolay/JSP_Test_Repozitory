@@ -1,3 +1,4 @@
+package product;
 
 public class Product {
 	private int id;
@@ -15,6 +16,11 @@ public class Product {
 		this.name = name;
 		this.price = price;
 	}
+	
+	public Product() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -11,6 +11,8 @@ import javax.servlet.http.Part;
 
 import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
+import product.Product;
+
 /**
  * Servlet implementation class UploadServlet
  */

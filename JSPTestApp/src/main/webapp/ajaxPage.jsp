@@ -24,23 +24,23 @@
       var chbox1 = document.getElementsByName("checkbox1")[0];
       var param = "box=1";
         if (chbox1.checked) {
-    	var xhr = new XMLHttpRequest();
-    	xhr.open("post","AjaxProcessingServlet",true);
-    	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	xhr.send(param);
-    	xhr.onreadystatechange = function () {
-    	  if (this.readyState!=4) {
-    	    return;
-    	  }
-    	  if (this.status!=200) {
-    	    alert('Error encountered');
-    	  }
-    	  var dispDiv = document.getElementById("dispDiv1");
-    	  dispDiv.innerHTML = xhr.responseText;
-    	}
-      } else {
-    	  var dispDiv = document.getElementById("dispDiv1");
-    	  dispDiv.innerHTML = '';
+    	    var xhr = new XMLHttpRequest();
+    	    xhr.open("post","AjaxProcessingServlet",true);
+    	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	    xhr.send(param);
+    	    xhr.onreadystatechange = function () {
+    	        if (this.readyState!=4) {
+    	            return;
+    	        }
+    	        if (this.status!=200) {
+    	            alert('Error encountered');
+    	        }
+    	        var dispDiv = document.getElementById("dispDiv1");
+    	        dispDiv.innerHTML = xhr.responseText;
+    	    }
+        } else {
+    	    var dispDiv = document.getElementById("dispDiv1");
+    	    dispDiv.innerHTML = '';
       }
       
     	

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import product.Product;
+
 public class DB_Manager {
 	private final String user = "root";
 	private final String password = "root";
@@ -14,6 +16,11 @@ public class DB_Manager {
 	private final String dbName = "my_db";
 	ArrayList<Product> list;
 	
+	public DB_Manager() throws Exception {
+		super();
+		Class.forName(driver);
+	}
+
 	//Method for upload product data in DB
 	public int insertProduct (Product prod) throws Exception {
 		int id = 0;//id of last entry
@@ -25,7 +32,6 @@ public class DB_Manager {
 		Double prodPrice = prod.getPrice();
 		
 		//get connection with DB, insert the data
-		Class.forName(driver);
 		try (Connection con =  DriverManager.getConnection(url+dbName+"?useSSL=false", user, password);
 			 PreparedStatement pstm = con.prepareStatement("INSERT INTO products (name, brand, color, description, price) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			 Statement stm = con.createStatement();) {
@@ -47,8 +53,23 @@ public class DB_Manager {
 		return id;
 	}
 	
-	public ArrayList<Product> getProducts () {
-		//
+	public ArrayList<Product> getProducts (String prodName, String prodBrand, String prodColor, double minPrice, double maxPrice) throws Exception {
+		list = new ArrayList<Product>();
+		try (Connection con = DriverManager.getConnection(url+dbName+"?useSSL=false", user, password);
+			 PreparedStatement pstm = con.prepareStatement("SELECT*FROM products WHERE name=?")) {
+			pstm.setString(1, prodName);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				Product prod = new Product();
+				prod.setId(rs.getInt(1));
+				prod.setName(rs.getString(2));
+				prod.setBrand(rs.getString(3));
+				prod.setColor(rs.getString(4));
+				prod.setDescription(rs.getString(5));
+				prod.setPrice(rs.getDouble(6));
+				list.add(prod);
+			}
+		}
 		return list;
 	}
 }
